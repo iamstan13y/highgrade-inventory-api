@@ -1,6 +1,7 @@
 ﻿using HighGradeInventory.API.Models.Data;
 using HighGradeInventory.API.Models.Local;
 using HighGradeInventory.API.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace HighGradeInventory.API.Models.Repository
 {
@@ -27,7 +28,7 @@ namespace HighGradeInventory.API.Models.Repository
 
         public async Task<Result<Account>> LoginAsync(LoginRequest login)
         {
-            var account = await _context.Accounts!.Where(x => x.Email == login.Email).FirstOrDefaultAsync();
+            var account = await _context.Accounts!.Where(x => x.Username == login.Username).FirstOrDefaultAsync();
 
             if (account == null || _passwordService.VerifyHash(login.Password!, account!.Password!) == false)
                 return new Result<Account>(false, new List<string>() { "Username or password is incorrect!" });
