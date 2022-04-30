@@ -1,5 +1,6 @@
 ﻿using HighGradeInventory.API.Models.Data;
 using HighGradeInventory.API.Models.Local;
+using Microsoft.EntityFrameworkCore;
 
 namespace HighGradeInventory.API.Models.Repository
 {
@@ -23,9 +24,10 @@ namespace HighGradeInventory.API.Models.Repository
             return new Result<Inventory>(inventory);
         }
 
-        public Task<Result<IEnumerable<Inventory>>> GetAllAsync()
+        public async Task<Result<IEnumerable<Inventory>>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var inventories = await _context.Inventories!.ToListAsync();
+            return new Result<IEnumerable<Inventory>>(inventories);
         }
 
         public Task<Result<Inventory>> GetByIdAsync(int id)
