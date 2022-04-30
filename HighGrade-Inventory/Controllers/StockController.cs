@@ -45,7 +45,7 @@ namespace HighGradeInventory.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> PutStock(StockRequest request)
+        public async Task<IActionResult> PutStock(UpdateStockRequest request)
         {
             var result = await _stockRepository.UpdateAsync(new Stock
             {
