@@ -13,6 +13,23 @@ namespace HighGradeInventory.API.Models.Repository
             _context = context;
         }
 
+        public async Task<Result<Stock>> AddAsync(Stock stock)
+        {
+            var inventory = await _context.Inventories!.Where(x => x.Id == stock.InventoryId).FirstOrDefaultAsync();
+            if (inventory == null) return new Result<Stock>(false, new List<string> { "Inventory with provided Id does not exist." });
+
+            inventory.Quantity += stock.Quantity;
+            inventory.DateModified = DateTime.Now;
+            stock.DateCreated = DateTime.Now;
+            stock.DateModified = DateTime.Now;
+
+            _context.Update(inventory);
+            await _context.Stocks!.AddAsync(stock);
+            await _context.SaveChangesAsync();
+     
+            return new Result<Stock>(stock);
+        }
+
         public async Task<Result<IEnumerable<Stock>>> GetAllAsync()
         {
             var stock = await _context.Stocks!.ToListAsync();
