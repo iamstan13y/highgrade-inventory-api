@@ -5,9 +5,22 @@ namespace HighGradeInventory.API.Models.Repository
 {
     public class InventoryRepository : IInventoryRepository
     {
-        public Task<Result<Inventory>> AddAsync(Inventory inventory)
+        private readonly AppDbContext _context;
+
+        public InventoryRepository(AppDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+
+        public async Task<Result<Inventory>> AddAsync(Inventory inventory)
+        {
+            inventory.DateCreated = DateTime.Now;
+            inventory.DateModified = DateTime.Now;
+
+            await _context.AddAsync(inventory);
+            await _context.SaveChangesAsync();
+
+            return new Result<Inventory>(inventory);
         }
 
         public Task<Result<IEnumerable<Inventory>>> GetAllAsync()
