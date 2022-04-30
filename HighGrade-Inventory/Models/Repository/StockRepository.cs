@@ -44,5 +44,22 @@ namespace HighGradeInventory.API.Models.Repository
 
             return new Result<Stock>(stock);
         }
+
+        public async Task<Result<Stock>> UpdateAsync(Stock stock)
+        {
+            var stockInDb = await _context.Stocks!.Where(x => x.Id == stock.Id).Include(x => x.Inventory).FirstOrDefaultAsync();
+            if (stockInDb == null) return new Result<Stock>(false, new List<string> { "Stock does not exist." });
+
+            stockInDb.Inventory!.Quantity += stock.Quantity - stockInDb.Quantity;
+            stockInDb.Quantity = stock.Quantity;
+
+            stockInDb.DateModified = DateTime.Now;
+            stockInDb.Inventory.DateModified = DateTime.Now;
+
+            _context.Stocks!.Update(stockInDb);
+            await _context.SaveChangesAsync();
+
+            return new Result<Stock>(stockInDb);
+        }
     }
 }

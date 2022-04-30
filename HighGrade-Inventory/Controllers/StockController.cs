@@ -43,5 +43,20 @@ namespace HighGradeInventory.API.Controllers
 
             return Ok(result);
         }
+
+        [HttpPut]
+        public async Task<IActionResult> PutStock(StockRequest request)
+        {
+            var result = await _stockRepository.UpdateAsync(new Stock
+            {
+                Id = request.Id,
+                InventoryId = request.InventoryId,
+                Quantity = request.Quantity
+            });
+
+            if (!result.Success) return BadRequest(result);
+
+            return Ok(result);
+        }
     }
 }

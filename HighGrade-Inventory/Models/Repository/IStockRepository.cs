@@ -8,5 +8,6 @@ namespace HighGradeInventory.API.Models.Repository
         Task<Result<IEnumerable<Stock>>> GetAllAsync();
         Task<Result<Stock>> GetByIdAsync(int id);
         Task<Result<Stock>> AddAsync(Stock stock);
+        Task<Result<Stock>> UpdateAsync(Stock stock);
     }
 }
