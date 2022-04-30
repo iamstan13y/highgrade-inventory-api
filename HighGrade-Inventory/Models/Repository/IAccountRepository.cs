@@ -6,5 +6,6 @@ namespace HighGradeInventory.API.Models.Repository
     public interface IAccountRepository
     {
         Task<Result<Account>> CreateAsync(Account account);
+        Task<Result<Account>> LoginAsync(LoginRequest login);
     }
 }
