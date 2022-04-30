@@ -10,5 +10,7 @@ namespace HighGradeInventory.API.Models.Data
         }
 
         public DbSet<Account>? Accounts { get; set; }
+        public DbSet<Inventory>? Inventories { get; set; }
+        public DbSet<Stock>? Stocks { get; set; }
     }
 }
