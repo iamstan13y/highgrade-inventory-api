@@ -31,5 +31,14 @@ namespace HighGradeInventory.API.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Get() => Ok(await _inventoryRepository.GetAllAsync());
+
+        [HttpGet("get-by-id/{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var result = await _inventoryRepository.GetByIdAsync(id);
+            if (!result.Success) return NotFound(result);
+
+            return Ok(result);
+        }
     }
 }

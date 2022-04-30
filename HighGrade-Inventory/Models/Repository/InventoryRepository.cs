@@ -30,9 +30,12 @@ namespace HighGradeInventory.API.Models.Repository
             return new Result<IEnumerable<Inventory>>(inventories);
         }
 
-        public Task<Result<Inventory>> GetByIdAsync(int id)
+        public async Task<Result<Inventory>> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var inventory = await _context.Inventories!.Where(x => x.Id == id).FirstOrDefaultAsync();
+
+            if (inventory == null) return new Result<Inventory>(false, new List<string> { "Inventory does not exist." });
+            return new Result<Inventory>(inventory);
         }
     }
 }
