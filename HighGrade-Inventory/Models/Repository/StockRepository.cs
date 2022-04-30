@@ -19,5 +19,13 @@ namespace HighGradeInventory.API.Models.Repository
 
             return new Result<IEnumerable<Stock>>(stock);
         }
+
+        public async Task<Result<Stock>> GetByIdAsync(int id)
+        {
+            var stock = await _context.Stocks!.Where(x => x.Id == id).FirstOrDefaultAsync();
+            if (stock == null) return new Result<Stock>(false, new List<string> { "Stock does not exist." });
+
+            return new Result<Stock>(stock);
+        }
     }
 }

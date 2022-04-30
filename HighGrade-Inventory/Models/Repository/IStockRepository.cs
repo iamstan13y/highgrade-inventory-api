@@ -6,5 +6,6 @@ namespace HighGradeInventory.API.Models.Repository
     public interface IStockRepository
     {
         Task<Result<IEnumerable<Stock>>> GetAllAsync();
+        Task<Result<Stock>> GetByIdAsync(int id);
     }
 }

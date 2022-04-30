@@ -17,5 +17,15 @@ namespace HighGradeInventory.API.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetStock() => Ok(await _stockRepository.GetAllAsync());
+
+        [HttpGet("get-by-id/{id}")]
+        public async Task<IActionResult> GetStock(int id)
+        {
+            var result = await _stockRepository.GetByIdAsync(id);
+
+            if (!result.Success) return NotFound(result);
+
+            return Ok(result);
+        }
     }
 }
