@@ -21,6 +21,11 @@ namespace HighGradeInventory.API.Migrations
                 {
                     table.PrimaryKey("PK_Accounts", x => x.Id);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Accounts",
+                columns: new[] { "Username", "Password" },
+                values: new object[] { "admin", "$ju!137$V1$10000$YfOyXuVMTre5sAa3mozYTUR05CqwhsPt/UzZlruZQteS+I5Z" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

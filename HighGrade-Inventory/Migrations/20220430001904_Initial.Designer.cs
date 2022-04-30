@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HighGradeInventory.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220429233341_Initial")]
+    [Migration("20220430001904_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
