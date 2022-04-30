@@ -5,6 +5,7 @@
         public int Id { get; set; }
         public string? ColourName { get; set; }
         public double Quantity { get; set; }
+        public double AlertLevel { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
     }

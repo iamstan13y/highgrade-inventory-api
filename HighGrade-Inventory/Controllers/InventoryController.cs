@@ -23,7 +23,8 @@ namespace HighGradeInventory.API.Controllers
             var result = await _inventoryRepository.AddAsync(new Inventory
             {
                 ColourName = request.ColourName,
-                Quantity = request.Quantity
+                Quantity = request.Quantity,
+                AlertLevel = request.AlertLevel,
             });
 
             return Ok(result);
