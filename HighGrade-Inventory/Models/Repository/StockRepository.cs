@@ -45,6 +45,12 @@ namespace HighGradeInventory.API.Models.Repository
             return new Result<Stock>(stock);
         }
 
+        public async Task<Result<IEnumerable<Stock>>> GetByInventoryIdAsync(int inventoryId)
+        {
+            var stocks = await _context.Stocks!.Where(x => x.InventoryId == inventoryId).ToListAsync();
+            return new Result<IEnumerable<Stock>>(stocks);
+        }
+
         public async Task<Result<Stock>> UpdateAsync(Stock stock)
         {
             var stockInDb = await _context.Stocks!.Where(x => x.Id == stock.Id).Include(x => x.Inventory).FirstOrDefaultAsync();

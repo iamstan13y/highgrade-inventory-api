@@ -58,5 +58,8 @@ namespace HighGradeInventory.API.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("get-by-inventoryId/{inventoryId}")]
+        public async Task<IActionResult> Get(int inventoryId) => Ok(await _stockRepository.GetByInventoryIdAsync(inventoryId));
     }
 }
